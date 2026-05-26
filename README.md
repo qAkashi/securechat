@@ -163,7 +163,7 @@ encrypt(msg, key)    (сервер не знает    │      decrypt(msg, key)
 ## 🛠 Технологии
 
 ### Frontend
-- **HTML5 / CSS3 / Vanilla JS** — без фреймворков
+- **HTML5 / CSS3 /  JS** — без фреймворков
 - **Bootstrap 5.3** — адаптивная сетка и компоненты
 - **CSS Custom Properties** — переключение тёмной темы
 
