@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SecureChat — Настройки</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<div class="settings-layout">
+
+  <!-- Sidebar nav -->
+  <aside class="settings-sidebar">
+    <div class="sidebar-header">
+      <a href="chat.html"><button class="header-icon-btn">←</button></a>
+      <span class="sidebar-title">Настройки</span>
+      <button class="header-icon-btn" onclick="toggleTheme()">☀</button>
+    </div>
+
+    <div style="flex:1;overflow-y:auto;padding-top:.5rem">
+      <div class="settings-nav-section">Аккаунт</div>
+      <div class="settings-nav-item active" data-panel="profile">
+        <span class="nav-ic">👤</span> Профиль
+      </div>
+      <div class="settings-nav-item" data-panel="security">
+        <span class="nav-ic">🔐</span> Безопасность
+      </div>
+      <div class="settings-nav-item" data-panel="keys">
+        <span class="nav-ic">🔑</span> Ключи шифрования
+      </div>
+      <div class="settings-nav-section mt-2">Приложение</div>
+      <div class="settings-nav-item" data-panel="notifications">
+        <span class="nav-ic">🔔</span> Уведомления
+      </div>
+      <div class="settings-nav-item" data-panel="threatmodel">
+        <span class="nav-ic">🛡</span> Threat Model
+      </div>
+      <div class="settings-nav-item" data-panel="about">
+        <span class="nav-ic">ℹ</span> О проекте
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="settings-main">
+
+    <!-- PROFILE -->
+    <section class="settings-panel active" id="panel-profile">
+      <h5 class="mb-3" style="color:var(--tg-text);font-weight:700">Профиль</h5>
+
+      <div class="settings-card">
+        <div class="settings-card-title">Основная информация</div>
+        <div class="settings-row">
+          <div><div class="settings-row-label">Имя пользователя</div><div class="settings-row-sub">Для поиска</div></div>
+          <input class="tg-s-input" value="alice_dev" style="width:180px"/>
+        </div>
+        <div class="settings-row">
+          <div><div class="settings-row-label">Email</div><div class="settings-row-sub">Восстановление аккаунта</div></div>
+          <input class="tg-s-input" type="email" value="alice@example.com" style="width:220px"/>
+        </div>
+        <div class="settings-row">
+          <div><div class="settings-row-label">Тёмная тема</div></div>
+          <label class="tg-toggle">
+            <input type="checkbox" id="themeChk" checked onchange="toggleTheme()">
+            <div class="tg-toggle-track"><div class="tg-toggle-thumb"></div></div>
+          </label>
+        </div>
+      </div>
+      <button class="btn-tg-save" onclick="showToast('Сохранено ✓')">Сохранить изменения</button>
+    </section>
+
+    <!-- SECURITY -->
+    <section class="settings-panel" id="panel-security">
+      <h5 class="mb-3" style="color:var(--tg-text);font-weight:700">Безопасность</h5>
+      <div class="settings-card">
+        <div class="settings-card-title">Аутентификация</div>
+        <div class="settings-row">
+          <div><div class="settings-row-label">Хэширование паролей</div></div>
+          <select class="tg-s-select"><option>Argon2id</option><option>bcrypt</option></select>
+        </div>
+        <div class="settings-row">
+          <div><div class="settings-row-label">Сессия JWT</div></div>
+          <select class="tg-s-select"><option>1 час</option><option selected>24 часа</option><option>7 дней</option></select>
+        </div>
+        <div class="settings-row">
+          <div><div class="settings-row-label">Автовыход при неактивности</div></div>
+          <label class="tg-toggle"><input type="checkbox" checked><div class="tg-toggle-track"><div class="tg-toggle-thumb"></div></div></label>
+        </div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-card-title">Сообщения</div>
+        <div class="settings-row">
+          <div><div class="settings-row-label">TTL по умолчанию</div><div class="settings-row-sub">Для новых диалогов</div></div>
+          <select class="tg-s-select">
+            <option value="0" selected>Выкл</option>
+            <option value="60">1 мин</option>
+            <option value="300">5 мин</option>
+            <option value="3600">1 час</option>
+          </select>
+        </div>
+        <div class="settings-row">
+          <div><div class="settings-row-label">Уведомление о скриншоте</div></div>
+          <label class="tg-toggle"><input type="checkbox"><div class="tg-toggle-track"><div class="tg-toggle-thumb"></div></div></label>
+        </div>
+      </div>
+      <button class="btn-tg-save" onclick="showToast('Сохранено ✓')">Сохранить</button>
+    </section>
+
+    <!-- KEYS -->
+    <section class="settings-panel" id="panel-keys">
+      <h5 class="mb-3" style="color:var(--tg-text);font-weight:700">Ключи шифрования</h5>
+      <div class="settings-card">
+        <div class="settings-card-title">Публичный ключ X25519</div>
+        <div class="p-3">
+          <div class="key-box" id="pubKeyBox">Генерация…</div>
+          <div class="d-flex gap-2 mt-2">
+            <button class="btn-tg-outline" onclick="copyKey()">📋 Копировать</button>
+            <button class="btn-tg-outline" onclick="exportKey()">⬇ Экспорт JSON</button>
+          </div>
+        </div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-card-title">Отпечаток ключа</div>
+        <div class="p-3">
+          <div class="key-box" id="fpBox">Вычисление…</div>
+          <div class="settings-row-sub mt-2">Сравните с собеседником — несовпадение указывает на MITM.</div>
+        </div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-card-title" style="color:var(--tg-danger)">Опасная зона</div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-row-label">Перегенерировать ключевую пару</div>
+            <div class="settings-row-sub">Все активные сессии будут разорваны</div>
+          </div>
+          <button class="btn-tg-danger" onclick="regenKeys()">♻ Перегенерировать</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTIFICATIONS -->
+    <section class="settings-panel" id="panel-notifications">
+      <h5 class="mb-3" style="color:var(--tg-text);font-weight:700">Уведомления</h5>
+      <div class="settings-card">
+        <div class="settings-card-title">Push (Web Push API)</div>
+        <div class="settings-row">
+          <div class="settings-row-label">Новые сообщения</div>
+          <label class="tg-toggle"><input type="checkbox" checked><div class="tg-toggle-track"><div class="tg-toggle-thumb"></div></div></label>
+        </div>
+        <div class="settings-row">
+          <div><div class="settings-row-label">Удаление по TTL</div><div class="settings-row-sub">Сообщение самоуничтожилось</div></div>
+          <label class="tg-toggle"><input type="checkbox"><div class="tg-toggle-track"><div class="tg-toggle-thumb"></div></div></label>
+        </div>
+        <div class="settings-row">
+          <div class="settings-row-label">Предупреждения безопасности</div>
+          <label class="tg-toggle"><input type="checkbox" checked><div class="tg-toggle-track"><div class="tg-toggle-thumb"></div></div></label>
+        </div>
+      </div>
+      <button class="btn-tg-save" onclick="showToast('Сохранено ✓')">Сохранить</button>
+    </section>
+
+    <!-- THREAT MODEL -->
+    <section class="settings-panel" id="panel-threatmodel">
+      <h5 class="mb-3" style="color:var(--tg-text);font-weight:700">Threat Model</h5>
+      <div class="settings-card">
+        <div class="settings-card-title">Векторы угроз</div>
+        <div class="threat-row">
+          <span class="threat-badge ok">ЗАЩИТА</span>
+          <div><div class="threat-name">Компрометация сервера</div><div class="threat-desc">E2E: сервер получает только ciphertext. Ключи не покидают клиент.</div></div>
+        </div>
+        <div class="threat-row">
+          <span class="threat-badge ok">ЗАЩИТА</span>
+          <div><div class="threat-name">MITM / перехват трафика</div><div class="threat-desc">TLS 1.3 + верификация отпечатка ключа по внешнему каналу.</div></div>
+        </div>
+        <div class="threat-row">
+          <span class="threat-badge ok">ЗАЩИТА</span>
+          <div><div class="threat-name">XSS / CSRF</div><div class="threat-desc">CSP-политика, HttpOnly cookies, SameSite=Strict, CSRF-токены.</div></div>
+        </div>
+        <div class="threat-row">
+          <span class="threat-badge ok">ЗАЩИТА</span>
+          <div><div class="threat-name">Brute-force</div><div class="threat-desc">Rate limiting (Redis), Argon2id, блокировка аккаунта.</div></div>
+        </div>
+        <div class="threat-row">
+          <span class="threat-badge ok">ЗАЩИТА</span>
+          <div><div class="threat-name">Утечка истории</div><div class="threat-desc">TTL-механизм удаляет сообщения из БД и клиента по таймеру.</div></div>
+        </div>
+        <div class="threat-row">
+          <span class="threat-badge warn">ЧАСТИЧНО</span>
+          <div><div class="threat-name">Физический доступ к устройству</div><div class="threat-desc">Ключи в IndexedDB уязвимы. Рекомендуется шифрование диска.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="settings-panel" id="panel-about">
+      <h5 class="mb-3" style="color:var(--tg-text);font-weight:700">О проекте</h5>
+      <div class="settings-card">
+        <div class="settings-card-title">Технический стек</div>
+        <div class="settings-row"><div class="settings-row-label">Frontend</div><div style="color:var(--tg-muted);font-size:.85rem">React + TypeScript + Vite</div></div>
+        <div class="settings-row"><div class="settings-row-label">Криптография</div><div style="color:var(--tg-blue);font-size:.85rem">X25519 + ChaCha20-Poly1305</div></div>
+        <div class="settings-row"><div class="settings-row-label">Backend</div><div style="color:var(--tg-muted);font-size:.85rem">Node.js + Fastify + TypeScript</div></div>
+        <div class="settings-row"><div class="settings-row-label">База данных</div><div style="color:var(--tg-muted);font-size:.85rem">PostgreSQL + Prisma ORM</div></div>
+        <div class="settings-row"><div class="settings-row-label">Real-time</div><div style="color:var(--tg-muted);font-size:.85rem">Socket.IO</div></div>
+        <div class="settings-row"><div class="settings-row-label">Деплой</div><div style="color:var(--tg-muted);font-size:.85rem">Docker Compose + Caddy</div></div>
+        <div class="settings-row"><div class="settings-row-label">Версия</div><div style="color:var(--tg-muted);font-size:.85rem">MVP v0.1.0</div></div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-card-title">Репозиторий</div>
+        <div class="p-3" style="font-family:monospace;font-size:.85rem;color:var(--tg-blue)">
+          github.com/username/securechat-diploma
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /settings-main -->
+</div><!-- /settings-layout -->
+
+<div class="toast-msg" id="toastMsg"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/settings.js"></script>
+</body>
+</html>

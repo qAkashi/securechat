@@ -1,0 +1,17 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/launch.json
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Node (if backend added later)
+node_modules/
+dist/
+.env
+.env.local

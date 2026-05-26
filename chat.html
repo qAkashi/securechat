@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SecureChat — Чат</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<div class="chat-wrap">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="tg-sidebar" id="sidebar">
+
+    <div class="sidebar-header">
+      <button class="header-icon-btn">☰</button>
+      <span class="sidebar-title">SecureChat</span>
+      <button class="header-icon-btn" onclick="toggleTheme()" title="Тема">☀</button>
+      <a href="settings.html"><button class="header-icon-btn" title="Настройки">⚙</button></a>
+    </div>
+
+    <div class="search-wrap position-relative">
+      <span class="search-icon-label">🔍</span>
+      <input class="form-control tg-search" id="searchInput" type="text" placeholder="Поиск"/>
+    </div>
+
+    <div class="contacts-list" id="contactsList"></div>
+
+    <div class="sidebar-enc-footer">
+      🔒 Все сообщения <span style="color:var(--tg-blue);margin-left:.25rem">E2E зашифрованы</span>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <main class="chat-main" id="chatMain">
+
+    <!-- Empty state -->
+    <div class="chat-empty" id="emptyState">
+      <div class="chat-empty-icon">💬</div>
+      <div class="chat-empty-text">Выберите диалог</div>
+    </div>
+
+    <!-- Active chat -->
+    <div id="activeChat" style="display:none;flex-direction:column;flex:1;overflow:hidden;">
+
+      <!-- Header -->
+      <div class="chat-header">
+        <div class="tg-avatar av4" id="hdrAvatar" style="width:36px;height:36px;font-size:.8rem">?</div>
+        <div class="chat-header-info">
+          <div class="chat-header-name" id="hdrName">—</div>
+          <div class="chat-header-status" id="hdrStatus">онлайн</div>
+        </div>
+        <div class="e2e-pill ms-auto">🔑 E2E</div>
+        <button class="header-icon-btn ms-2" title="Верификация ключа">🔎</button>
+      </div>
+
+      <!-- Messages -->
+      <div class="messages-area" id="messagesArea">
+        <div class="day-label">Сегодня</div>
+      </div>
+
+      <!-- Input -->
+      <div class="chat-input-wrap">
+        <div class="ttl-row">
+          <span id="ttlLabel">⏱ Самоудаление:</span>
+          <select class="tg-select" id="ttlSelect">
+            <option value="0">Выкл</option>
+            <option value="10">10 сек</option>
+            <option value="60">1 мин</option>
+            <option value="300">5 мин</option>
+            <option value="3600">1 час</option>
+            <option value="86400">1 день</option>
+          </select>
+        </div>
+        <div class="input-row-main">
+          <div class="msg-input-wrap">
+            <textarea class="form-control tg-msg-input" id="msgInput"
+              placeholder="Сообщение…" rows="1" maxlength="2000"></textarea>
+            <span class="char-count" id="charCount">0/2000</span>
+          </div>
+          <button class="send-btn" id="sendBtn">➤</button>
+        </div>
+        <div class="enc-note">🔒 Зашифровано на устройстве · Сервер видит только ciphertext</div>
+      </div>
+
+    </div><!-- /activeChat -->
+  </main>
+
+</div><!-- /chat-wrap -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/chat.js"></script>
+</body>
+</html>
