@@ -200,12 +200,3 @@ encrypt(msg, key)    (сервер не знает    │      decrypt(msg, key)
 
 ---
 
-## 📄 Лицензия
-
-Распространяется под лицензией MIT. Подробнее в файле [LICENSE](LICENSE).
-
----
-
-<div align="center">
-  <sub>Дипломный проект · УП.11 · SecureChat MVP v0.1.0</sub>
-</div>
