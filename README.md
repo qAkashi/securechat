@@ -30,7 +30,7 @@
 
 | Авторизация | Чат | Настройки |
 |:-----------:|:---:|:---------:|
-| ![Login](screenshots/login.png) | ![Chat](screenshots/chat.png) | ![Settings](screenshots/settings.png) |
+| ![Login](screenshots/login.jpg) | ![Chat](screenshots/chat.jpg) | ![Settings](screenshots/settings.jpg) |
 
 ---
 
