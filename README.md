@@ -30,7 +30,7 @@
 
 | Авторизация | Чат | Настройки |
 |:-----------:|:---:|:---------:|
-| ![Login](https://via.placeholder.com/280x180/0d1117/58a6ff?text=Login+Page) | ![Chat](https://via.placeholder.com/280x180/0d1117/3fb950?text=Chat+UI) | ![Settings](https://via.placeholder.com/280x180/0d1117/bc8cff?text=Settings) |
+| ![Login](screenshots/login.png) | ![Chat](screenshots/chat.png) | ![Settings](screenshots/settings.png) |
 
 ---
 
