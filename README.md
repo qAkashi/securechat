@@ -45,7 +45,7 @@
 
 ```bash
 # 1. Клонировать репозиторий
-git clone https://github.com/YOUR_USERNAME/securechat.git
+git clone https://github.com/qAkashi/securechat.git
 cd securechat
 
 # 2. Открыть в браузере
@@ -167,13 +167,13 @@ encrypt(msg, key)    (сервер не знает    │      decrypt(msg, key)
 - **Bootstrap 5.3** — адаптивная сетка и компоненты
 - **CSS Custom Properties** — переключение тёмной темы
 
-### Криптография (концептуально)
-- **X25519** — обмен ключами (ECDH)
+### Криптография 
+- **X25519** — обмен ключами 
 - **ChaCha20-Poly1305** — симметричное шифрование сообщений
 - **Argon2id** — хэширование паролей
 - **SHA-256** — отпечатки ключей
 
-### Backend (планируемый стек)
+### Backend 
 - **Node.js + Fastify + TypeScript**
 - **PostgreSQL + Prisma ORM**
 - **Socket.IO** — real-time обмен сообщениями
